@@ -1,91 +1,91 @@
-# ⚡ GLITCH & ERROR TERMINAL - Službena Dokumentacija Sustava
+# 🖥️ Terminal Dev Forum
 
-## 📑 Sadržaj
-
-1. [Uvod](#1-uvod)
-2. [Tehnička Arhitektura](#2-tehnička-arhitektura)
-3. [Implementacija Sučelja (UX/UI)](#3-implementacija-sučelja)
-4. [Baza Podataka i Sigurnost](#4-baza-podataka-i-sigurnost)
-5. [Automatizacija (Data Seeding)](#5-automatizacija)
-6. [Instalacija i Pokretanje](#6-instalacija-i-pokretanje)
-7. [Zaključak](#7-zaključak)
+A sleek, developer-focused community forum inspired by vintage terminal interfaces. Built with **React** and **Firebase**, this application features real-time data synchronization, threaded discussions, and a unique dark-mode aesthetic.
 
 ---
 
-## 1. Uvod
+## 🚀 Quick Access (Test Credentials)
 
-**Glitch & Error Terminal** je progresivna web aplikacija (PWA) razvijena kao platforma za razmjenu tehničkih informacija. Projekt je nastao s ciljem rješavanja problema lošeg iskorištenja prostora na modernim ultra-wide monitorima, koristeći fluidni sustav mreža (Grid) i retro-futuristički estetski stil.
+To explore the platform immediately without creating a new account, use the following credentials:
 
-## 2. Tehnička Arhitektura
+- **Email:** `test@test.com`
+- **Password:** `test123`
 
-Sustav je izgrađen na **Serverless** modelu, što znači da nema potrebe za ručnim upravljanjem backend poslužiteljima.
+---
 
-### 2.1 Tehnološki Stog
+## ✨ Key Features
 
-- **React.js (v18+):** Glavna biblioteka za upravljanje sučeljem i komponentama.
-- **Firebase Auth:** Upravljanje identitetima i sigurnim sesijama.
-- **Cloud Firestore:** NoSQL baza podataka koja radi u stvarnom vremenu (Real-time).
-- **CSS3 Grid & Flexbox:** Sustav za responzivni dizajn koji koristi 100% širine ekrana.
+- **Cyberpunk UI:** High-contrast terminal aesthetic with modern glassmorphism elements.
+- **Real-time Interaction:** Posts, likes, and comments update instantly across all clients via Firestore Snapshots.
+- **Threaded Conversations:** Support for nested replies (sub-comments) to keep discussions organized.
+- **Ownership Control:** Users can delete their own posts, comments, and individual replies.
+- **Unique Likes:** Intelligent heart system that prevents spamming (one like per user per post).
+- **Dynamic Search:** Real-time filtering by keyword and category (Games, Software, Hardware, Other).
+- **Avatar Selector:** Custom profile picture selection during account registration.
 
-## 3. Implementacija Sučelja (UX/UI)
+---
 
-### 3.1 Full-Width Layout
+## 🛠️ Technology Stack
 
-Za razliku od klasičnih web stranica, Glitch & Error koristi trostupačnu arhitekturu:
+- **Frontend:** React.js (Hooks, Functional Components)
+- **Backend/Database:** Firebase Firestore
+- **Authentication:** Firebase Auth
+- **Styling:** Pure CSS3 (Custom Variables & Grid Layout)
 
-- **Sidebar (Lijevo):** Korisnički modul, opcije identiteta i odjava.
-- **Feed (Sredina):** Glavni tok informacija, koristi `1fr` jedinicu za dinamičko širenje.
-- **Stats (Desno):** Terminalski podaci i sistemska statistika.
+---
 
-### 3.2 Identity Selector (Avatar API)
+## 📦 Installation & Setup
 
-Implementiran je napredni sustav za odabir avatara koji koristi **DiceBear API**. Korisnici mogu birati između 48+ nasumično generiranih vektorskih grafika. Svaka promjena se sinkronizira s Firebase profilom i Firestore bazom u milisekundama.
+1.  **Clone the repository:**
 
-## 4. Baza Podataka i Sigurnost
-
-### 4.1 Struktura Podataka
-
-Baza je optimizirana za brzo čitanje (Read-heavy):
-
-- **Kolekcija `users`:** Sadrži UID, username, email i metapodatke o kreiranju računa.
-- **Kolekcija `posts`:** Sadrži naslov, sadržaj, kategoriju, ID autora i vremensku oznaku (ServerTimestamp).
-
-### 4.2 Sigurnosni Protokoli
-
-Sigurnost je osigurana na strani klijenta i servera:
-
-- **Ownership Check:** Gumb za brisanje (trash icon) se renderira isključivo ako se `auth.currentUser.uid` podudara s `post.authorId`.
-- **Protected Routes:** Aplikacija ne dopušta pristup glavnom terminalu ako korisnik nije uspješno autentificiran.
-
-## 5. Automatizacija (Data Seeding)
-
-Za potrebe testiranja performansi pri velikom opterećenju, razvijen je modul `Seeder.jsx`. Ovaj modul omogućuje:
-
-- Generiranje 100+ opširnih objava jednim klikom.
-- Randomizaciju kategorija i naslova.
-- Simulaciju stvarnog prometa na mreži.
-
-## 6. Instalacija i Pokretanje
-
-1.  **Kloniranje repozitorija:**
     ```bash
-    git clone [https://github.com/tvoj-username/glitch-error.git](https://github.com/tvoj-username/glitch-error.git)
+    git clone [your-repository-url]
+    cd terminal-dev-forum
     ```
-2.  **Instalacija paketa:**
+
+2.  **Install dependencies:**
+
     ```bash
     npm install
     ```
-3.  **Konfiguracija Firebase-a:**
-    Kreirajte `src/firebase.js` i umetnite svoje API ključeve iz Firebase konzole.
-4.  **Pokretanje:**
+
+3.  **Configure Firebase:**
+    Open `src/firebase.js` and replace the configuration with your own Firebase project credentials:
+
+    ```javascript
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "...",
+      appId: "...",
+    };
+    ```
+
+4.  **Run the application:**
     ```bash
     npm start
     ```
 
-## 7. Zaključak
-
-Projekt uspješno demonstrira sinergiju između React frontend-a i Firebase backend-a. Kroz implementaciju fluidnog dizajna, sustav nudi superiornu preglednost podataka na velikim ekranima, dok real-time statistika pruža korisnicima osjećaj žive i aktivne mreže.
-
 ---
 
-**© 2026 GLITCH & ERROR TERMINAL // SYSTEM STATUS: STABLE**
+## 🛡️ Required Firestore Security Rules
+
+To ensure likes and deletions work correctly while maintaining security, apply these rules in your Firebase Console:
+
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /posts/{postId} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      // Allows likes and comment updates for any authenticated user
+      allow update: if request.auth != null;
+      // Restricts deletion strictly to the original author
+      allow delete: if request.auth != null && request.auth.uid == resource.data.authorId;
+    }
+  }
+}
+```
